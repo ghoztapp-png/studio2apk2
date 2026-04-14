@@ -5,6 +5,9 @@ RUN apk add --no-cache unzip
 
 WORKDIR /app
 
+# Copy package.json so npm install can read dependencies
+COPY package.json ./
+
 # Copy ZIP archives into the image
 COPY ["files.zip", "files (1).zip", "./"]
 
