@@ -15,6 +15,9 @@ RUN for z in *.zip; do \
     done \
  && rm -f *.zip
 
+# Move server.js into the /app/backend/ directory where startup.sh expects it
+RUN mkdir -p /app/backend && mv /app/server.js /app/backend/server.js
+
 # Make startup script executable
 RUN chmod +x startup.sh
 
