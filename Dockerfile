@@ -24,7 +24,4 @@ RUN mkdir -p /app/backend && mv /app/server.js /app/backend/server.js
 # Install npm dependencies from package.json
 RUN npm install
 
-# Make startup script executable
-RUN chmod +x startup.sh
-
-CMD ["sh", "startup.sh"]
+CMD ["node", "backend/server.js"]
