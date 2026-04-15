@@ -25,6 +25,10 @@ RUN mkdir -p /app/backend && mv /app/server.js /app/backend/server.js
 RUN sed -i 's|../frontend/index\.html|../index.html|g' /app/backend/server.js \
  && sed -i 's|../frontend|..|g' /app/backend/server.js
 
+# Copy the build-time patch script and inject the /health endpoint + safe root handler
+COPY patch-server.js ./
+RUN node patch-server.js
+
 # Install npm dependencies from package.json
 RUN npm install
 
