@@ -21,6 +21,10 @@ RUN for z in *.zip; do \
 # Move server.js into the /app/backend/ directory where startup.sh expects it
 RUN mkdir -p /app/backend && mv /app/server.js /app/backend/server.js
 
+# Fix frontend paths: index.html is at /app/index.html, not /app/frontend/index.html
+RUN sed -i 's|../frontend/index\.html|../index.html|g' /app/backend/server.js \
+ && sed -i 's|../frontend|..|g' /app/backend/server.js
+
 # Install npm dependencies from package.json
 RUN npm install
 
